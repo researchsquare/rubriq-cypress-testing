@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  cypress-orders:
+    image: cypress/included:13.1.0
+    environment:
+      - CYPRESS_BASE_URL=https://orders-api.staging.sqr.io
+    entrypoint: /bin/sh
+    command: -c 'npm install && npx cypress run --config-file=cypress.orders-api.config.js'
+    network_mode: host
+    working_dir: /app
+    volumes:
+      - .:/app
+
+  cypress-customer:
+    image: cypress/included:13.1.0
+    environment:
+      - CYPRESS_BASE_URL=https://secure-aje.staging.sqr.io
+    entrypoint: /bin/sh
+    command: -c 'npm install && npx cypress run --config-file=cypress.customer.config.js'
+    network_mode: host
+    working_dir: /app
+    volumes:
+      - .:/app
