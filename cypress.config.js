@@ -23,7 +23,7 @@ module.exports = defineConfig({
       runMode: 2,
       openMode: 2
     },
-    baseUrl: 'https://secure-aje.staging.sqr.io',
+    baseUrl: 'https://secure-aje.staging.sqr.io/rubriq',
     specPattern: 'cypress/e2e/rubriq/**/*.cy.{js,jsx,ts,tsx}',
     trashAssetsBeforeRuns: true,
     // Add or increase timeouts
