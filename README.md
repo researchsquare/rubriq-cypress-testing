@@ -17,24 +17,23 @@ make init
 
 To run tests in **browser**: 
 ```
-make open-customer
-make open-orders
+make open-rubriq
+
    ```
 
 To run tests **headless**:
 ```
-make run-customer
-make run-orders
+make run-rubriq
+
 ```
 
 To run tests in **Docker**:
-```
-make docker-customer
-make docker-orders
-make docker-orders-local
+make docker-rubriq
 ```
 
-It is recommended to run Orders-API suite in Docker. This is environment where Orders-API tests ususally run in Github Actions.
+```
+
+
 
 
 > Makefile is a special format file that helps build and manage project, it simplifies the task of typing the compiling commands.
