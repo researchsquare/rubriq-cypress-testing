@@ -34,15 +34,7 @@ module.exports = defineConfig({
 
     setupNodeEvents(on, config) {
       on('task', {
-        readPdf(pathToPdf) {
-          return new Promise((resolve) => {
-            const pdfPath = path.resolve(pathToPdf);
-            let dataBuffer = fs.readFileSync(pdfPath);
-            pdf(dataBuffer).then(function ({ text }) {
-              resolve(text);
-            });
-          });
-        }
+    
       });
 
       return require('./cypress/plugins/index.js')(on, config);
