@@ -33,10 +33,6 @@ module.exports = defineConfig({
     execTimeout: 60000,            // Timeout for executing commands (60 seconds)
 
     setupNodeEvents(on, config) {
-      on('task', {
-    
-      });
-
       return require('./cypress/plugins/index.js')(on, config);
     },
   },
