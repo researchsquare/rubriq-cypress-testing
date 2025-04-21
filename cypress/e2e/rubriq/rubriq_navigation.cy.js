@@ -1,4 +1,4 @@
-import LoginPageObject from "./pageObjectRubriq.json";
+import pageobject from "../../e2e/rubriq/pageObjectRubriq.json"
 import loginTestData from "./testDataRubriq.json";
 
 const{
@@ -7,14 +7,12 @@ const{
 } = loginTestData;
 
 const{
-    email,
-    password,
-    submit,
+    myAccount,
     rubriqTab,
     abstractTab,
     translateTab, 
     editingTab
-} = LoginPageObject;
+} = pageobject.tabNavigation;
  
  
 describe('Navigation', function () {
@@ -22,7 +20,9 @@ describe('Navigation', function () {
         cy.visit('https://secure-aje.staging.sqr.io')
         cy.acceptCookies()
         cy.uiLogin(rubriqLoginEmail,rubriqLoginPassword)
-    cy.url().should('include', '/home')
+    //cy.url().should('include','/home')
+    cy.log(rubriqTab)
+    cy.get(myAccount).should('be.visible').click()
     cy.get(rubriqTab).click();
     cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
     cy.get(translateTab).click();

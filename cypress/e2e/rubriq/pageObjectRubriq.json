@@ -6,7 +6,8 @@
     "regNewLink": ".skip-tracking.trackable-link"
     },
     "tabNavigation":{
-    "rubriqTab": "[title='rubriq-tab']",
+    "myAccount":".userAccount",
+    "rubriqTab": "[href='/en/rubriq']",
     "translateTab": "[title='rubriq-translation']",
     "abstractTab": "[title='rubriq.abstracts']",
     "editingTab": "[title='editing']",
