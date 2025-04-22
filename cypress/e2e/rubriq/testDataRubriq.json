@@ -1,4 +1,6 @@
-{
+{    
+    "firstName":"Bruce",
+    "lastName":"Well",
     "rubriqLoginEmail": "ajith.a@testing.com",
     "rubriqLoginPassword": "Test@12345",
     "rubriqUpgradeEmail": "rubriqupgrade@aje.com",
@@ -9,12 +11,12 @@
     "nameCardHolder": "Raghul",
     "expDate": "12/28",
     "cvv": "100",
-    "rubriqLoginEmailActive": "rubriqActive1@test.com",
+    "rubriqLoginEmailActive": "ajith.a@testing.com",
     "rubriqLoginEmailActive2": "rubriqActive321@test.com",
     "rubriqLoginEmailActive3": "rubriqActive54321@test.com",
     "rubriqLoginEmailActive4": "rubriqActive7654321@test.com",
     "rubriqLoginEmailActive5": "rubriqActive987654321@test.com",
-    "rubriqLoginPasswordActive": "passwordActive123",
+    "rubriqLoginPasswordActive":"Test@12345",
     "rubriqLoginEmailActive1": "rubriq0987654321@aje.com",
     "paddlePlanActiveEmail": "Activestatus12@gmail.com",
     "paddlePlanActivePassword": "password1234@",

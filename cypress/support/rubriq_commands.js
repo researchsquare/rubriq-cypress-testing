@@ -1,10 +1,11 @@
 import pageobject from "../../cypress/e2e/rubriq/pageObjectRubriq.json"
+const testData = require('../fixtures/testDataRubriq.json');
 Cypress.Commands.add("uiLogin", (Email, Password) => {
     cy.intercept({
         url: 'api/auth/login',
         method: 'POST'
     }).as('login')
-    cy.get(pageobject.login.email).type(Email,{ delay: 0 })
+    cy.get(pageobject.login.email).type(Email,{delay:0})
     cy.get(pageobject.login.password).type(Password,{delay:0})
     cy.get(pageobject.login.submit).click()
     cy.wait('@login').its('response.statusCode').should('eq', 200)
@@ -14,27 +15,30 @@ Cypress.Commands.add('acceptCookies', () => {
        cy.contains('Allow all').should('be.visible').click({force:true})   
   })
   Cypress.Commands.add("userRegistration", (email, password, country) => { 
-    cy.intercept({
-        method: 'POST',
-        url: '/api/auth/register',
-    }).as('registration')
+    // cy.intercept({
+    //     method: 'POST',
+    //     url: '/api/auth/register',
+    // }).as('registration')
 
-    cy.get(pageobjectRubriq.loginPage.registrationForm).children().get(pageobject.loginPage.emailTf).type(email)
+    cy.get(pageobject.login.registrationForm).children().get(pageobject.login.email).type(email,{delay:0})
 
-    cy.get(pageobject.loginPage.registrationForm).children().get(pageobject.loginPage.firstName).typeRandom(CustomerData.firstName)
-    cy.get(pageobject.loginPage.registrationForm).children().get(pageobject.loginPage.lastName).type(CustomerData.lastName)
+    cy.get(pageobject.login.registrationForm).children().get(pageobject.login.firstName).type(testData.firstName,{delay:0})
+    cy.get(pageobject.login.registrationForm).children().get(pageobject.login.lastName).type(testData.lastName,{delay:0})
 
-    cy.get(pageobject.loginPage.registrationForm).children().get(pageobject.loginPage.passwordTf).type(password)
+    cy.get(pageobject.login.registrationForm).children().get(pageobject.login.password).type(password,{delay:0})
 
     cy.get('body').then(($body) => {
-        if (Cypress.$('body').find('span[title="Country"]').is(':visible'))
-        cy.chooseReactSelectOption('Country/Region', country)
+        if (Cypress.$('body').find('span[title="Country"]').is(':visible')){
+          cy.chooseReactSelectOption('Country/Region', country)
+        }
+        
     })
 
-    cy.get(pageobject.loginPage.registrationCheckBox).check()
-    cy.get(pageobject.loginPage.termsOfService).check()
-    cy.get(pageobject.loginPage.registrationForm).submit()
-    cy.wait('@registration')
+   // cy.get(pageobject.login.registrationCheckBox).check()
+    cy.get(pageobject.login.termsOfService).check({force:true})
+    cy.get(pageobject.login.registerbtn).click()
+   // cy.wait('@registration')
+    cy.get(pageobject.tabNavigation.myAccount).should('be.visible')
 });
 Cypress.Commands.add('uploadFile', (fileName, fileType = 'text/plain') => {
     cy.fixture(fileName, 'base64').then((fileContent) => {
@@ -118,3 +122,12 @@ Cypress.Commands.add('getIframeBody', (iframeSelector) => {
           .click({ force: true });
       });
 });
+Cypress.Commands.add('chooseReactSelectOption', (label, text) => {
+  if (text) {
+      cy
+          .contains(label)
+          .parent()
+          .find(`input:first`)
+          .type(`${text}{enter}`, {force: true, delay:0})  
+  }
+})
