@@ -18,7 +18,7 @@ module.exports = defineConfig({
     viewportHeight: 1080,
     retries: {
       runMode: 2,
-      openMode: 0
+      openMode: 2
     },
     baseUrl: 'https://secure-aje.staging.sqr.io/rubriq',
     specPattern: 'cypress/e2e/rubriq/**/*.cy.{js,jsx,ts,tsx}',

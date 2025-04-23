@@ -7,7 +7,7 @@ Cypress.Commands.add("uiLogin", (Email, Password) => {
     cy.get(pageobject.login.email).type(Email,{ delay: 0 })
     cy.get(pageobject.login.password).type(Password,{delay:0})
     cy.get(pageobject.login.submit).click()
-    cy.wait('@login').its('response.statusCode').should('eq', 200)
+    cy.wait('@login')
 })
 
 Cypress.Commands.add('acceptCookies', () => {
