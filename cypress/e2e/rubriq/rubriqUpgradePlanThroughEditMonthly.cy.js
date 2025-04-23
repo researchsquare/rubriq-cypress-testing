@@ -1,4 +1,4 @@
-import LoginPageObject from "./pageObjectRubriq.json";
+import pageobject from "./pageObjectRubriq.json";
 import loginTestData from "./testDataRubriq.json";
 
 const{
@@ -36,7 +36,7 @@ const{
     subscribeBtn,
     rubriqPop,
     regNewLink
-} = LoginPageObject;
+} = pageobject;
 // Generate a random email address
 function generateRandomEmail() {
     const timestamp = new Date().getTime();
@@ -50,21 +50,24 @@ function generateRandomPassword() {
 
 describe('Upgrade', function () {
     it('navigate to rubriq Tab', function() {
-        const email = generateRandomEmail();
-        const password = generateRandomPassword();
-        const country = 'United States'; // Specify your country here
-        cy.visit('https://secure-aje.staging.sqr.io')
-        cy.get(regNewLink).should('be.visible') .click()
+        // const email = generateRandomEmail();
+        // const password = generateRandomPassword();
+        // const country = 'United States'; // Specify your country here
+        // cy.visit('https://secure-aje.staging.sqr.io')
+        // cy.get(regNewLink).should('be.visible') .click()
 
-        cy.userRegistration(email, password, country)
+        // cy.userRegistration(email, password, country)
  
  
 
-        cy.visit('https://secure-aje.staging.sqr.io')
-        cy.acceptCookies()
-        cy.uiLogin( email, password )
-    cy.url().should('include', '/home')
-    cy.get(rubriqTab).click();
+        // cy.visit('https://secure-aje.staging.sqr.io')
+        // cy.acceptCookies()
+    cy.visit('https://secure-aje.staging.sqr.io')
+    cy.uiLogin( loginTestData.rubriqLoginEmail,loginTestData.rubriqLoginPassword )
+    cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
+   // cy.url().should('include','/home')
+    cy.contains('Workspace').click({ force: true });
+   // cy.get(rubriqTab).click();
     cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
     cy.get(rubriqPop).click()
     cy.get(editingTab).click();

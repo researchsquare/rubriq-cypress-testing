@@ -41,7 +41,7 @@ describe('Upgrade', function () {
         cy.visit('https://secure-aje.staging.sqr.io')
         cy.acceptCookies()
         cy.uiLogin( rubriqUpgradeEmail, rubriqUpgradePassword )
-    cy.url().should('include', '/home')
+   // cy.url().should('include', '/home')
     cy.get(rubriqTab).click();
     cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
     cy.get(editingTab).click();

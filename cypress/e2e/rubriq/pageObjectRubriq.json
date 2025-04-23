@@ -3,16 +3,22 @@
     "email": "[name='email']",
     "password": "[name='password']" ,
     "submit": "[type='submit']",
-    "regNewLink": ".skip-tracking.trackable-link"
+    "regNewLink": ".skip-tracking.trackable-link",
+    "registrationForm":"[data-cy='registration-form']",
+    "registerbtn":"[data-cy='submit']",
+    "firstName":"[name='firstName']",
+    "lastName":"[name='lastName']",
+    "termsOfService":"#agreeToTOS"
     },
     "tabNavigation":{
     "myAccount":".userAccount",
     "rubriqTab": "[href='/en/rubriq']",
-    "translateTab": "[title='rubriq-translation']",
-    "abstractTab": "[title='rubriq.abstracts']",
+    "translateTab": "[title='curie-translation']",
+    "abstractTab": "[title='curie.abstracts']",
     "editingTab": "[title='editing']",
     "rubriqPop": ".btn.btn-primary.btn-squared",
-    "ctnBtn": "[title='continue']"
+    "ctnBtn": "[title='continue']",
+    "Gotit":"[aria-label='Got it']"
     },
     "editing":{
     "checkDocumentEdit": "[title='check document']",
