@@ -1,12 +1,12 @@
-import pageobject from "../../cypress/e2e/rubriq/pageObjectRubriq.json"
 Cypress.Commands.add("uiLogin", (Email, Password) => {
     cy.intercept({
         url: 'api/auth/login',
         method: 'POST'
     }).as('login')
-    cy.get(pageobject.login.email).type(Email,{ delay: 0 })
-    cy.get(pageobject.login.password).type(Password,{delay:0})
-    cy.get(pageobject.login.submit).click()
+
+    cy.get(pageobject.loginPage.emailTf).type(Email)
+    cy.get(pageobject.loginPage.passwordTf).type(Password)
+    cy.get(pageobject.loginPage.submitBtn).click()
     cy.wait('@login')
 })
 
@@ -19,7 +19,7 @@ Cypress.Commands.add('acceptCookies', () => {
         url: '/api/auth/register',
     }).as('registration')
 
-    cy.get(pageobjectRubriq.loginPage.registrationForm).children().get(pageobject.loginPage.emailTf).type(email)
+    cy.get(pageobject.loginPage.registrationForm).children().get(pageobject.loginPage.emailTf).type(email)
 
     cy.get(pageobject.loginPage.registrationForm).children().get(pageobject.loginPage.firstName).typeRandom(CustomerData.firstName)
     cy.get(pageobject.loginPage.registrationForm).children().get(pageobject.loginPage.lastName).type(CustomerData.lastName)
