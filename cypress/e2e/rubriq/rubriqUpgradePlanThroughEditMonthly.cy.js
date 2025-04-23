@@ -1,16 +1,12 @@
-import pageobject from "./pageObjectRubriq.json";
-import loginTestData from "./testDataRubriq.json";
+import pageobject from "../../e2e/rubriq/pageObjectRubriq.json"
+let testData; // define outside so we can use it in beforeEach or inside cy.session
 
-const{
-   rubriqUpgradeEmail,
-    rubriqUpgradePassword,
-    zipcodeData,
-    countryData,
-    cardNumber,
-    nameCardHolder,
-    expDate,
-    cvv
-} = loginTestData;
+before(() => {
+  cy.fixture('testDataRubriq').then((data) => {
+    testData = data;
+    
+  });
+});
 
 const{
     email,
@@ -63,31 +59,32 @@ describe('Upgrade', function () {
         // cy.visit('https://secure-aje.staging.sqr.io')
         // cy.acceptCookies()
     cy.visit('https://secure-aje.staging.sqr.io')
-    cy.uiLogin( loginTestData.rubriqLoginEmail,loginTestData.rubriqLoginPassword )
+    cy.acceptCookies();
+    cy.uiLogin( testData.rubriqLoginEmail,testData.rubriqLoginPassword )
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
    // cy.url().should('include','/home')
     cy.contains('Workspace').click({ force: true });
    // cy.get(rubriqTab).click();
     cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
-    cy.get(rubriqPop).click()
-    cy.get(editingTab).click();
+    //cy.get(rubriqPop).click()
+    cy.get(pageobject.tabNavigation.editingTab).click();
     cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq/editing')
-    cy.get(checkDocumentEdit).click()
-    cy.get(upgradeNow).click()
-    cy.get(getPremium).click()
+    cy.get(pageobject.editing.checkDocumentEdit).click()
+    cy.get(pageobject.editing.upgradeNow).click()
+    cy.get(pageobject.planAndPayment.getPremium).click()
     cy.get(plan).last().click();
 
-    cy.get(checkOutWithPaddle).click()
+    cy.get(pageobject.planAndPayment.checkOutWithPaddle).click()
     cy.wait(10000)
     //cy.get('[data-testid="authenticationEmailInput"]').should('have.value', email );
    // cy.get(countryPayment).should('have.value', countryData);
-    cy.get(zipCode).type(zipcodeData)
-    cy.get(paymentContinue).click()
-    cy.get(cardNumberObject).type(cardNumber)
-    cy.get(cardHolderName).type(nameCardHolder)
-    cy.get(expDateObject).type(expDate)
-    cy.get(cvvObject).type(cvv)
-    cy.get(subscribeBtn).click()
+    cy.get(pageobject.planAndPayment.zipCode).type(testData.zipcodeData)
+    cy.get(pageobject.planAndPayment.paymentContinue).click()
+    cy.get(pageobject.planAndPayment.cardNumberObject).type(testData.cardNumber)
+    cy.get(pageobject.planAndPayment.cardHolderName).type(testData.nameCardHolder)
+    cy.get(pageobject.planAndPayment.expDateObject).type(testData.expDate)
+    cy.get(pageobject.planAndPayment.cvvObject).type(testData.cvv)
+    cy.get(pageobject.planAndPayment.subscribeBtn).click()
   });
 });
 
