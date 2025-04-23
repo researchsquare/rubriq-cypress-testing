@@ -10,17 +10,16 @@ module.exports = defineConfig({
   e2eFolder: "cypress/e2e/",
   screenshotsFolder: "cypress/screenshots",
   videosFolder: "cypress/videos",
-  video: true,
-  screenshotOnRunFailure: true,
-  retries: {
-    runMode: 0,
-    openMode: 0
-  },
+  video: false,
+  screenshotOnRunFailure: false,
 
   e2e: {
     viewportWidth: 1920,
     viewportHeight: 1080,
-    
+    retries: {
+      runMode: 2,
+      openMode: 0
+    },
     baseUrl: 'https://secure-aje.staging.sqr.io/rubriq',
     specPattern: 'cypress/e2e/rubriq/**/*.cy.{js,jsx,ts,tsx}',
     supportFile: "cypress/support/e2e.js",

@@ -3,18 +3,13 @@
     "email": "[name='email']",
     "password": "[name='password']" ,
     "submit": "[type='submit']",
-    "regNewLink": ".skip-tracking.trackable-link",
-    "registrationForm":"[data-cy='registration-form']",
-    "registerbtn":"[data-cy='submit']",
-    "firstName":"[name='firstName']",
-    "lastName":"[name='lastName']",
-    "termsOfService":"#agreeToTOS"
+    "regNewLink": ".skip-tracking.trackable-link"
     },
     "tabNavigation":{
     "myAccount":".userAccount",
     "rubriqTab": "[href='/en/rubriq']",
-    "translateTab": "[title='curie-translation']",
-    "abstractTab": "[title='curie.abstracts']",
+    "translateTab": "[title='rubriq-translation']",
+    "abstractTab": "[title='rubriq.abstracts']",
     "editingTab": "[title='editing']",
     "rubriqPop": ".btn.btn-primary.btn-squared",
     "ctnBtn": "[title='continue']"
