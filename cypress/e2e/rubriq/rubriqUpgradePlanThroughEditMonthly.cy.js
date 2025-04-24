@@ -7,32 +7,6 @@ before(() => {
     
   });
 });
-
-const{
-    email,
-    password,
-    submit,
-    rubriqTab,
-    abstractTab,
-    translateTab, 
-    editingTab,
-    checkDocumentEdit,
-    upgradeNow,
-    getPremium,
-    checkOutWithPaddle,
-    zipCode,
-    plan,
-    paymentEmail,
-    countryPayment,
-    paymentContinue,
-    cardNumberObject,
-    cardHolderName,
-    expDateObject,
-    cvvObject,
-    subscribeBtn,
-    rubriqPop,
-    regNewLink
-} = pageobject;
 // Generate a random email address
 function generateRandomEmail() {
     const timestamp = new Date().getTime();

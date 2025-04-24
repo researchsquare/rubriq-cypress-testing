@@ -7,7 +7,10 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   scrollBehavior: 'center',
   experimentalModifyObstructiveThirdPartyCode: true,
+  fixturesFolder: "cypress/fixtures",
   e2eFolder: "cypress/e2e/",
+  supportFile: "cypress/support/e2e.js",
+  pluginsFile: "cypress/plugins/index.js",
   screenshotsFolder: "cypress/screenshots",
   videosFolder: "cypress/videos",
   video: true,
@@ -20,12 +23,12 @@ module.exports = defineConfig({
   e2e: {
     viewportWidth: 1920,
     viewportHeight: 1080,
-    
+    retries: {
+      runMode: 2,
+      openMode: 2
+    },
     baseUrl: 'https://secure-aje.staging.sqr.io/rubriq',
     specPattern: 'cypress/e2e/rubriq/**/*.cy.{js,jsx,ts,tsx}',
-    supportFile: "cypress/support/e2e.js",
-    fixturesFolder: "cypress/fixtures",
-
     trashAssetsBeforeRuns: true,
     // Add or increase timeouts
     defaultCommandTimeout: 100000,  // Default command timeout (30 seconds)
