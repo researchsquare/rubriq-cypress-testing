@@ -71,11 +71,17 @@ describe('Upgrade', function () {
     cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq/editing')
     cy.get(pageobject.editing.checkDocumentEdit).click()
     cy.get(pageobject.editing.upgradeNow).click()
-    cy.get(pageobject.planAndPayment.getPremium).click()
-    cy.get(plan).last().click();
-
-    cy.get(pageobject.planAndPayment.checkOutWithPaddle).click()
-    cy.wait(10000)
+    cy.get(pageobject.planAndPayment.getPremium)
+  .parent()
+  .parent()
+  .siblings()
+  .find('[title="curie.get-starter"]')
+  .click();
+    //cy.get(pageobject.planAndPayment.plan).last().click();
+    cy.intercept('POST', 'https://sandbox-checkout-service.paddle.com/transaction-checkout', {
+      statusCode: 200}).as('paddleCheckout');
+   cy.get(pageobject.planAndPayment.checkOutWithPaddle).should('be.visible').click({force:true})
+    cy.wait('@paddleCheckout')
     //cy.get('[data-testid="authenticationEmailInput"]').should('have.value', email );
    // cy.get(countryPayment).should('have.value', countryData);
     cy.get(pageobject.planAndPayment.zipCode).type(testData.zipcodeData)

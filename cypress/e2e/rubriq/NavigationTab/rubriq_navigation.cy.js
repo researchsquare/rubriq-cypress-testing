@@ -1,4 +1,4 @@
-import pageobject from "../../e2e/rubriq/pageObjectRubriq.json"
+import pageobject from "../pageObjectRubriq.json";
 let testData; // define outside so we can use it in beforeEach or inside cy.session
 
 before(() => {

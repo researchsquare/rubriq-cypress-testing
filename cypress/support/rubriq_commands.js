@@ -29,7 +29,7 @@ Cypress.Commands.add('acceptCookies', () => {
 
     cy.get('body').then(($body) => {
         if (Cypress.$('body').find('span[title="Country"]').is(':visible')){
-          cy.chooseReactSelectOption('Country/Region', country)
+          cy.chooseReactSelectOption('Country/Region',country)
         }
         
     })
@@ -128,6 +128,9 @@ Cypress.Commands.add('chooseReactSelectOption', (label, text) => {
           .contains(label)
           .parent()
           .find(`input:first`)
-          .type(`${text}{enter}`, {force: true, delay:0})  
+          .type(`${text}`, {force: true, delay:100})
+          cy.contains(text).click({force:true})
+
   }
+  
 })

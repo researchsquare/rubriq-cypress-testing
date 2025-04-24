@@ -38,8 +38,9 @@
     "DownloadBtnEdit": "[data-icon='file-arrow-down']"
     },
     "planAndPayment":{
-    "getPremium": "[title='rubriq.upgrade-to-premium-title']",
-    "checkOutWithPaddle": "[title='rubriq.checkout-with-paddle']",
+    "getPremium": "[title='curie.curie-premium']",
+    "getPremiumWithTranslation": "title='rubriq.rubriq-premium-with-translation'",
+    "checkOutWithPaddle": ".paddle-button",
     "zipCode": "[name='postcode']",
     "paymentEmail": "[data-testid='authenticationEmailInput']",
     "countryPayment": "[data-testid='countriesSelect']",

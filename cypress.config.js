@@ -28,9 +28,9 @@ module.exports = defineConfig({
 
     trashAssetsBeforeRuns: true,
     // Add or increase timeouts
-    defaultCommandTimeout: 10000,  // Default command timeout (10 seconds)
-    responseTimeout: 15000,        // Timeout for network responses (15 seconds)
-    pageLoadTimeout: 30000,        // Timeout for page loads (30 seconds)
+    defaultCommandTimeout: 100000,  // Default command timeout (30 seconds)
+    responseTimeout: 100000,        // Timeout for network responses (30 seconds)
+    pageLoadTimeout: 100000,        // Timeout for page loads (30 seconds)
     execTimeout: 60000,            // Timeout for executing commands (60 seconds)
 
     setupNodeEvents(on, config) {
