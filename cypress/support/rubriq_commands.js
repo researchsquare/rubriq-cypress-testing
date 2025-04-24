@@ -1,3 +1,4 @@
+import pageobject from "../e2e/rubriq/pageObjectRubriq.json"
 Cypress.Commands.add("uiLogin", (Email, Password) => {
     cy.intercept({
         url: 'api/auth/login',
