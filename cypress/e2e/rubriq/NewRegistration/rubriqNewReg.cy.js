@@ -1,4 +1,4 @@
-import pageobject from "../pageObjectRubriq.json"
+const pageobject = require('../pageObjectRubriq.json');
 // Generate a random email address
 function generateRandomEmail() {
     const timestamp = new Date().getTime();

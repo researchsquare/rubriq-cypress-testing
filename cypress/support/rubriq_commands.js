@@ -1,4 +1,5 @@
 import pageobject from "../e2e/rubriq/pageObjectRubriq.json"
+import testData from "../fixtures/testDataRubriq.json"
 Cypress.Commands.add("uiLogin", (Email, Password) => {
     cy.intercept({
         url: 'api/auth/login',
@@ -39,6 +40,16 @@ Cypress.Commands.add('acceptCookies', () => {
    // cy.wait('@registration')
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible')
 });
+Cypress.Commands.add('customloginAndNavigateToRubriq', (email, password) => {
+  cy.visit('https://secure-aje.staging.sqr.io')
+  cy.acceptCookies();
+  cy.uiLogin(email,password)
+  cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
+  cy.contains('Workspace').click({ force: true });
+  cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
+
+});
+
 Cypress.Commands.add('uploadFile', (fileName, fileType = 'text/plain') => {
     cy.fixture(fileName, 'base64').then((fileContent) => {
       cy.get('input[type="file', {timeout: 10000}).then((input) => {
@@ -51,20 +62,6 @@ Cypress.Commands.add('uploadFile', (fileName, fileType = 'text/plain') => {
       })
     })
   })
- // Combined custom command to log in and navigate to the Curie tab
-Cypress.Commands.add('loginAndNavigateToRubiq', (email, password) => {
-    cy.visit('https://secure-aje.staging.sqr.io');
-    cy.get(curiePageObject.email).type(email);
-    cy.get(curiePageObject.password).type(password);
-    cy.get(curiePageObject.submit).click();
-    cy.url().should('include', '/home/');
-    cy.get(curiePageObject.myAccountBtn).click()
-    cy.get('a.nav-link.myAccountLinks.trackable-link')
-  .should('have.attr', 'href', '/en/rubriq')
-  .click();
-   cy.url().should('include', '/en/rubriq');
-
-});
 Cypress.Commands.add('getIframeBody', (iframeSelector) => {
     return cy
       .get(iframeSelector)
@@ -75,49 +72,49 @@ Cypress.Commands.add('getIframeBody', (iframeSelector) => {
   // In cypress/support/commands.js
 
   Cypress.Commands.add('fillPaymentDetails', (paymentData) => {
-    cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame, { timeout: 50000 })
-      .find(curiePageObject.planAndPayment.postCode)
+    cy.getIframeBody(pageobject.planAndPayment.paddleFrame, { timeout: 50000 })
+      .find(pageobject.planAndPayment.postCode)
       .type(paymentData.postCodeData, { force: true });
   
-    cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame)
-      .find(curiePageObject.planAndPayment.paddleSubmitBtn)
+    cy.getIframeBody(pageobject.planAndPayment.paddleFrame)
+      .find(pageobject.planAndPayment.paddleSubmitBtn)
       .parents()
       .first()
       .invoke('css', 'overflow', 'visible')
       .then(() => {
-        cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame)
-          .find(curiePageObject.planAndPayment.paddleSubmitBtn)
+        cy.getIframeBody(pageobject.planAndPayment.paddleFrame)
+          .find(pageobject.planAndPayment.paddleSubmitBtn)
           .click({ force: true });
       });
   
-    cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame)
-      .find(curiePageObject.planAndPayment.cardNumberObject)
+    cy.getIframeBody(pageobject.planAndPayment.paddleFrame)
+      .find(pageobject.planAndPayment.cardNumberObject)
       .should('be.visible')
       .type(paymentData.cardNumber, { force: true });
   
-    cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame)
-      .find(curiePageObject.planAndPayment.cardHolderName)
+    cy.getIframeBody(pageobject.planAndPayment.paddleFrame)
+      .find(pageobject.planAndPayment.cardHolderName)
       .should('be.visible')
       .type(paymentData.cardHolderNameData, { force: true });
   
-    cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame)
-      .find(curiePageObject.planAndPayment.expDateObject)
+    cy.getIframeBody(pageobject.planAndPayment.paddleFrame)
+      .find(pageobject.planAndPayment.expDateObject)
       .should('be.visible')
       .type(paymentData.expiryDateData, { force: true });
   
-    cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame)
-      .find(curiePageObject.planAndPayment.cvvObject)
+    cy.getIframeBody(pageobject.planAndPayment.paddleFrame)
+      .find(pageobject.planAndPayment.cvvObject)
       .should('be.visible')
       .type(paymentData.cvvData, { force: true });
   
-    cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame)
-      .find(curiePageObject.planAndPayment.cardPaymentFormSubmitBtn)
+    cy.getIframeBody(pageobject.planAndPayment.paddleFrame)
+      .find(pageobject.planAndPayment.cardPaymentFormSubmitBtn)
       .parents()
       .first()
       .invoke('css', 'overflow', 'visible')
       .then(() => {
-        cy.getIframeBody(curiePageObject.planAndPayment.paddleFrame)
-          .find(curiePageObject.planAndPayment.cardPaymentFormSubmitBtn)
+        cy.getIframeBody(pageobject.planAndPayment.paddleFrame)
+          .find(pageobject.planAndPayment.cardPaymentFormSubmitBtn)
           .click({ force: true });
       });
 });
@@ -131,5 +128,5 @@ Cypress.Commands.add('chooseReactSelectOption', (label, text) => {
           cy.contains(text).click({force:true})
 
   }
-  
+ 
 })

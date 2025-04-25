@@ -30,7 +30,7 @@
     "fileUpload": "[title='rubriq-file-upload-text']",
     "noPlanContentBox": "[title='no-plan-content']",
     "gotItBtn": "[title='got-it']",
-    "getProfEditing": "[title='rubriq.get-premium']",
+    "getProfEditing": "[title='curie.get-premium']",
     "deleteButtonEdit": "[data-icon='trash-can']",
     "DeleteConfirm": "[title='de-delete-file-yes-text']",
     "DeleteToastMessage": "[title='%(fileName)s deleted']",

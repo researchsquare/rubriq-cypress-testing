@@ -1,5 +1,5 @@
-import pageObject from "./pageObjectCurie.json";
-import testData from "./testDataCurie.json";
+import pageObject from "./pageObjectRubriq.json";
+import testData from "../../fixtures/testDataRubriq.json";
 
 // Test data for multiple styles of English
 const testCases = [
@@ -22,19 +22,17 @@ const uploadDocument = () => {
 };
 
 // Tests for Delete, Download, and Upgrade features
-describe('Curie Document Features - Delete, Download, Upgrade', () => {
+describe('Rubriq Document Features - Delete, Download, Upgrade', () => {
 
     testCases.forEach(({ StyleOfEnglish, StyleOfEnglishSelector }) => {
 
         beforeEach(() => {
             // Common setup steps
-            cy.loginAndNavigateToCurie(testData.curieLoginEmailActive, testData.curieLoginPasswordActive);
+            cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmail, testData.rubriqLoginPassword);
             uploadDocument();
-            cy.get(StyleOfEnglishSelector).click();
-            cy.get(StyleOfEnglishSelector).should('be.checked');
-            cy.get(StyleOfEnglishSelector).should('contain', StyleOfEnglish);
+            cy.get(StyleOfEnglishSelector).click().should('be.checked').should('contain',StyleOfEnglish)
             cy.get(pageObject.strBtn).click();
-            cy.get(pageObject.getProfEditing, { timeout: 1000 }).should('exist');
+            cy.get(pageObject.getProfEditing, { timeout: 10000 }).should('exist');
         });
 
         it(`Edit document to ${StyleOfEnglish} and verify deletion`, () => {

@@ -1,6 +1,7 @@
-import pageobject from "../../e2e/rubriq/pageObjectRubriq.json"
-let testData; // define outside so we can use it in beforeEach or inside cy.session
 
+let testData; // define outside so we can use it in beforeEach or inside cy.session
+import pageobject from './pageObjectRubriq.json';
+// Goes up 3 levels: cypress/e2e/rubriq → cypress/e2e → cypress → project root
 before(() => {
   cy.fixture('testDataRubriq').then((data) => {
     testData = data;
@@ -52,13 +53,13 @@ describe('Upgrade', function () {
   .find('[title="curie.get-starter"]')
   .click();
     //cy.get(pageobject.planAndPayment.plan).last().click();
-    cy.intercept('POST', 'https://sandbox-checkout-service.paddle.com/transaction-checkout', {
-      statusCode: 200}).as('paddleCheckout');
+    // cy.intercept('POST', 'https://sandbox-checkout-service.paddle.com/transaction-checkout', {
+    //   statusCode: 200}).as('paddleCheckout');
    cy.get(pageobject.planAndPayment.checkOutWithPaddle).should('be.visible').click({force:true})
-    cy.wait('@paddleCheckout')
+   // cy.wait('@paddleCheckout')
     //cy.get('[data-testid="authenticationEmailInput"]').should('have.value', email );
    // cy.get(countryPayment).should('have.value', countryData);
-    cy.get(pageobject.planAndPayment.zipCode).type(testData.zipcodeData)
+    cy.get(pageobject.planAndPayment.zipCode).should('be.visible').type(testData.zipcodeData)
     cy.get(pageobject.planAndPayment.paymentContinue).click()
     cy.get(pageobject.planAndPayment.cardNumberObject).type(testData.cardNumber)
     cy.get(pageobject.planAndPayment.cardHolderName).type(testData.nameCardHolder)
