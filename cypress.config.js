@@ -12,6 +12,7 @@ module.exports = defineConfig({
   downloadsFolder: 'cypress/downloads',
   videosFolder: "cypress/videos",
   video: true,
+  watchForFileChanges: false,
   screenshotOnRunFailure: true,
   viewportWidth: 1920,
   viewportHeight: 1080,

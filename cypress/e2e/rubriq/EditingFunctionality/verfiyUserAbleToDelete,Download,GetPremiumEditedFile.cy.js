@@ -15,7 +15,7 @@ const testCases = [
 // Function to upload a document
 const uploadDocument = () => {
     cy.get(pageObject.editing.checkDocumentEdit).should('be.visible').click();
-    cy.get(pageObject.editing.fileUpload, { timeout: 10000 }).click();
+    cy.get(pageObject.editing.fileUpload,{timeout: 10000}).click();
     cy.uploadFile('aje_ai_and_ml.docx'); // Ensure the file exists in the appropriate location
     cy.contains('Upload complete').should('be.visible')
     cy.get(pageObject.tabNavigation.ctnBtn).parent({timeout:10000}).click();

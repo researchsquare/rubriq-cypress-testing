@@ -12,7 +12,13 @@ Cypress.Commands.add("uiLogin", (Email, Password) => {
 })
 
 Cypress.Commands.add('acceptCookies', () => {
-       cy.contains('Allow all').should('be.visible').click({force:true})   
+  cy.get('body').then(($body) => {
+    if ($body.find(':contains("Allow all")').length > 0) {
+      cy.contains('Allow all').should('be.visible').click({ force: true });
+    } else {
+      cy.log('Cookie banner not found - proceeding');
+    }
+  });  
   })
   Cypress.Commands.add("userRegistration", (email, password, country) => { 
     // cy.intercept({
@@ -48,6 +54,17 @@ Cypress.Commands.add('customloginAndNavigateToRubriq', (email, password) => {
   cy.contains('Workspace').click({ force: true });
   cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq')
 
+});
+
+Cypress.Commands.add('addPreferredGroup', (group,email,password) => {
+  cy.visit(Cypress.config('baseUrl'))
+  cy.acceptCookies()
+  cy.uiLogin(email,password)
+  cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
+  cy.contains('My Plan').click({ force: true });
+  cy.url().should('include', Cypress.config('baseUrl')+'/en/plan')
+  cy.get(pageobject.editing.groupCode).should('be.visible').type(group,{delay:0})
+  cy.get(pageobject.login.submit).click()
 });
 
 Cypress.Commands.add('uploadFile', (fileName, fileType = 'text/plain') => {

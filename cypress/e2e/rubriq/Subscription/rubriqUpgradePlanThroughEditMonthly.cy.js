@@ -1,6 +1,6 @@
 
 let testData; // define outside so we can use it in beforeEach or inside cy.session
-import pageobject from './pageObjectRubriq.json';
+import pageobject from "../../../support/pageObjectRubriq.json";
 // Goes up 3 levels: cypress/e2e/rubriq → cypress/e2e → cypress → project root
 before(() => {
   cy.fixture('testDataRubriq').then((data) => {

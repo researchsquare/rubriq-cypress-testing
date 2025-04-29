@@ -1,4 +1,4 @@
-import pageObject from "./pageObjectRubriq.json";
+import pageObject from "../../../support/pageObjectRubriq.json";
 import testData from "../../fixtures/testDataRubriq.json";
 function generateRandomEmail() {
     const timestamp = new Date().getTime();
