@@ -1,39 +1,69 @@
 const { defineConfig } = require("cypress");
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
-const pdf = require('pdf-parse');
+//const pdf = require('pdf-parse');
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
   scrollBehavior: 'center',
   experimentalModifyObstructiveThirdPartyCode: true,
   fixturesFolder: "cypress/fixtures",
-  e2eFolder: "cypress/e2e/",
-  supportFile: "cypress/support/e2e.js",
-  pluginsFile: "cypress/plugins/index.js",
   screenshotsFolder: "cypress/screenshots",
+  downloadsFolder: 'cypress/downloads',
   videosFolder: "cypress/videos",
-  video: false,
-  screenshotOnRunFailure: false,
-
+  video: true,
+  screenshotOnRunFailure: true,
+  viewportWidth: 1920,
+  viewportHeight: 1080,
+  retries: {
+    runMode: 2,
+    openMode: 0
+  },
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'Rubriq Report',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
+  },
   e2e: {
-    viewportWidth: 1920,
-    viewportHeight: 1080,
-    retries: {
-      runMode: 2,
-      openMode: 2
-    },
-    baseUrl: 'https://secure-aje.staging.sqr.io/rubriq',
+    baseUrl: 'https://secure-aje.staging.sqr.io',
     specPattern: 'cypress/e2e/rubriq/**/*.cy.{js,jsx,ts,tsx}',
     trashAssetsBeforeRuns: true,
-    // Add or increase timeouts
-    defaultCommandTimeout: 100000,  // Default command timeout (100 seconds)
-    responseTimeout: 15000,        // Timeout for network responses (15 seconds)
-    pageLoadTimeout: 30000,        // Timeout for page loads (30 seconds)
-    execTimeout: 60000,            // Timeout for executing commands (60 seconds)
-
+    supportFile: "cypress/support/e2e.js",
     setupNodeEvents(on, config) {
+      require('cypress-mochawesome-reporter/plugin')(on);
+      on('task', {
+        // Task to delete a file from the downloads folder
+        deleteFile(fileName) {
+          const downloadsFolder = path.join(__dirname, 'cypress', 'downloads');
+          const filePath = path.join(downloadsFolder, fileName);
+    
+          // Check if the file exists before trying to delete
+          if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath); // Delete the file
+            return null; // Return null to indicate success
+          } else {
+            return `File not found: ${filePath}`;
+          }
+        },
+      });
+      on('task', {
+        checkFileDownload(filename) {
+          const downloadsFolder = path.join(__dirname, '..', '..', 'downloads');
+          const filePath = path.join(downloadsFolder, filename);
+          console.log('Checking file path:', filePath);
+          return fs.existsSync(filePath);
+        },
+      });
       return require('./cypress/plugins/index.js')(on, config);
+      
+     
     },
+    defaultCommandTimeout: 20000,
+    responseTimeout: 300000,
+    pageLoadTimeout: 200000,
+    execTimeout: 60000
   },
 });
