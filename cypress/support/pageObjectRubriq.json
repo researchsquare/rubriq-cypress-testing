@@ -35,7 +35,8 @@
     "DeleteConfirm": "[title='de-delete-file-yes-text']",
     "DeleteToastMessage": "[title='%(fileName)s deleted']",
     "getPremiumBtn": "[title='curie.get-premium']",
-    "DownloadBtnEdit": "[data-icon='file-arrow-down']"
+    "DownloadBtnEdit": "[data-icon='file-arrow-down']",
+     "groupCode":"[name='groupCode']"
     },
     "planAndPayment":{
     "getPremium": "[title='curie.curie-premium']",

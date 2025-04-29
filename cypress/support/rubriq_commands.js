@@ -49,6 +49,17 @@ Cypress.Commands.add('customloginAndNavigateToRubriq', (email, password) => {
   cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq')
 
 });
+Cypress.Commands.add('addPreferredGroup', (group,email,password) => {
+  cy.visit(Cypress.config('baseUrl'))
+  cy.acceptCookies()
+  cy.uiLogin(email,password)
+  cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
+  cy.contains('My Plan').click({ force: true });
+  cy.url().should('include', Cypress.config('baseUrl')+'/en/plan')
+  cy.get(pageobject.editing.groupCode).should('be.visible').type(group,{delay:0})
+  cy.get(pageobject.login.submit).click()
+});
+
 
 Cypress.Commands.add('uploadFile', (fileName, fileType = 'text/plain') => {
     cy.fixture(fileName, 'base64').then((fileContent) => {
