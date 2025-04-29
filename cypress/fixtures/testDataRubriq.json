@@ -23,7 +23,7 @@
   "paddlePlanActivePassword": "password1234@",
   "errorMsgUploadFile": "Please make sure you have uploaded a valid file and that no file uploads are in progress before continuing.",
   "noPlan": "We're sorry, your account does not have access to rubriq's editing features. Please upgrade to a Premium plan or check out our Help Center for answers to your questions.",
-  "noPlanAccessToTranslation": "Sorry, your account does not have access to rubriq’s translation features. Please upgrade to a Premium plan or check out our Help Center for answers to your questions.",
+  "noPlanAccessToTranslation": "Sorry, your account does not have access to Rubriq’s translation features. Please upgrade to a Premium plan or check out our ",
   "limitedExceedText": "Limit exceeded",
   "PaddleDateExiryEmail": "paddleexpirationmonthly12@gmail.com",
   "PaddleDateExiryEmailYearly": "paddleexpirationyearly12@gmail.com",

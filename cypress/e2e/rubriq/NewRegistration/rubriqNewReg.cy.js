@@ -9,33 +9,6 @@ function generateRandomEmail() {
 function generateRandomPassword() {
     return `P@ssw0rd${Math.floor(Math.random() * 10000)}`;
 }
-
-// Define the custom command
-// Cypress.Commands.add("userRegistration", (email, password, country) => { 
-//     cy.intercept({
-//         method: 'POST',
-//         url: '/api/auth/register',
-//     }).as('registration');
-
-//     cy.get('[data-cy="registration-form"]').children().get('[data-cy="email"]').type(email);
-
-//     cy.get('[data-cy="registration-form"]').children().get('[data-cy="firstName"]').typeRandom('Bruce');
-//     cy.get('[data-cy="registration-form"]').children().get('[data-cy="lastName"]').type('Banner');
-
-//     cy.get('[data-cy="registration-form"]').children().get('[data-cy="password"]').type(password);
-
-//     cy.get('body').then(($body) => {
-//         if (Cypress.$('body').find('span[title="Country"]').is(':visible'))
-//             cy.chooseReactSelectOption('Country/Region', country);
-//     });
-
-//     cy.get('[data-cy="optinToMarketing"]').check();
-//     cy.get('[data-cy="agreeToTOS"]').check();
-
-//     cy.get('[data-cy="registration-form"]').submit();
-//     cy.wait('@registration');
-// });
-
 // Usage example in a test
 describe('User Registration Test', () => {
     it('should register a new user with dynamic email and password', () => {

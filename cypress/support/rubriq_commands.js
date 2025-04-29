@@ -1,4 +1,4 @@
-import pageobject from "../e2e/rubriq/pageObjectRubriq.json"
+import pageobject from "./pageObjectRubriq.json"
 import testData from "../fixtures/testDataRubriq.json"
 Cypress.Commands.add("uiLogin", (Email, Password) => {
     cy.intercept({
@@ -38,15 +38,15 @@ Cypress.Commands.add('acceptCookies', () => {
     cy.get(pageobject.login.termsOfService).check({force:true})
     cy.get(pageobject.login.registerbtn).click()
    // cy.wait('@registration')
-    cy.get(pageobject.tabNavigation.myAccount).should('be.visible')
+    cy.get(pageobject.tabNavigation.myAccount,{timeout:40000}).should('be.visible')
 });
 Cypress.Commands.add('customloginAndNavigateToRubriq', (email, password) => {
-  cy.visit('https://secure-aje.staging.sqr.io')
-  cy.acceptCookies();
+  cy.visit(Cypress.config('baseUrl'))
+  cy.acceptCookies()
   cy.uiLogin(email,password)
   cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
   cy.contains('Workspace').click({ force: true });
-  cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
+  cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq')
 
 });
 
@@ -125,8 +125,10 @@ Cypress.Commands.add('chooseReactSelectOption', (label, text) => {
           .parent()
           .find(`input:first`)
           .type(`${text}`, {force: true, delay:100})
-          cy.contains(text).click({force:true})
+          cy.contains('div',text).should('be.visible').click({force:true})
 
   }
  
+ 
 })
+ 
