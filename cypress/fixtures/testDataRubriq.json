@@ -6,6 +6,7 @@
   "rubriqLoginPassword": "P@ssw0rd5209",
   "rubriqUpgradeEmail": "rubriqupgrade@aje.com",
   "rubriqUpgradePassword": "rubriqupgrade1234@",
+  "groupCode": "AJEVIP23",
   "zipcodeData": "123456",
   "countryData": "India",
   "cardNumber": "4000 0566 5566 5556",
@@ -33,5 +34,7 @@
   "postCodeData": "482021",
   "cardHolderNameData": "Raghul",
   "expiryDateData": "12/28",
-  "cvvData": "100"
+  "cvvData": "100",
+  "rubriqPreferredGroupEmail": "user1746167004643@test.aje.com",
+  "rubriqPreferredGroupPassword": "P@ssw0rd1202"
 }

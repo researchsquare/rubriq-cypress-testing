@@ -5,17 +5,17 @@ import loginTestData from "./testDataCurie.json";
 
 // Helper function to perform registration and navigate to the relevant page
 function navigateToRubriqTabAndPurchasePlan(planType) {
-  cy.visit('https://secure-aje.staging.sqr.io');
+  cy.visit(Cypress.config('baseUrl'));
   cy.get(LoginPageObject.login.regNewLink).should('be.visible').click();
   cy.userRegistration(generateRandomEmail(), loginTestData.curieLoginPasswordActive, 'United States');  // Use static password
 
   // Go to the Rubriq page
-  cy.visit('https://secure-aje.staging.sqr.io/en/rubriq');
-  cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq');
+  cy.visit(Cypress.config('baseUrl')+'/en/rubriq');
+  cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq');
 
   cy.get(LoginPageObject.tabNavigation.curiePop).click();
   cy.get(LoginPageObject.tabNavigation.editingTab).click();
-  cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq/editing');
+  cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq/editing');
 
   cy.get(LoginPageObject.editing.checkDocumentEdit).click();
   cy.get(LoginPageObject.editing.upgradeNow).click();
@@ -63,7 +63,7 @@ describe('Expiration Date Validation', function () {
     // Use the custom command to fill payment details
     cy.fillPaymentDetails(loginTestData);
 
-    cy.visit('https://secure-aje.staging.sqr.io/en/rubriq/plan');
+    cy.visit(Cypress.config('baseUrl')+'/en/rubriq/plan');
     cy.get(LoginPageObject.planAndPayment.displayedDate)
       .should('have.text', getExpirationDateMonth());
   });
@@ -74,7 +74,7 @@ describe('Expiration Date Validation', function () {
     // Use the custom command to fill payment details
     cy.fillPaymentDetails(loginTestData);
 
-    cy.visit('https://secure-aje.staging.sqr.io/en/rubriq/plan');
+    cy.visit(Cypress.config('baseUrl')+'/en/rubriq/plan');
     cy.get(LoginPageObject.planAndPayment.displayedDate)
       .should('have.text', getExpirationDateYear());
   });

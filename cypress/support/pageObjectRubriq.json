@@ -36,7 +36,10 @@
     "DeleteToastMessage": "[title='%(fileName)s deleted']",
     "getPremiumBtn": "[title='curie.get-premium']",
     "DownloadBtnEdit": "[data-icon='file-arrow-down']",
-     "groupCode":"[name='groupCode']"
+     "groupCode":"[name='groupCode']",
+     "groupCodeToast":"[role='alert']",
+     "removePreferredGroupDropDown":"[id='rubriqDropdownButton']",
+     "leavePreferredGroup":"Leave Preferred Group"
     },
     "planAndPayment":{
     "getPremium": "[title='curie.curie-premium']",

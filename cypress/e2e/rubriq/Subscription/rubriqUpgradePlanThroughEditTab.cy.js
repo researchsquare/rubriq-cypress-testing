@@ -38,14 +38,14 @@ const{
  
 describe('Upgrade', function () {
     it('navigate to rubriq Tab', function() {
-        cy.visit('https://secure-aje.staging.sqr.io')
+        cy.visit(Cypress.config('baseUrl'))
         cy.acceptCookies()
         cy.uiLogin( rubriqUpgradeEmail, rubriqUpgradePassword )
    // cy.url().should('include', '/home')
     cy.get(rubriqTab).click();
-    cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
+    cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq')
     cy.get(editingTab).click();
-    cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq/editing')
+    cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq/editing')
     cy.get(checkDocumentEdit).click()
     cy.get(upgradeNow).click()
     cy.get(getPremium).click()

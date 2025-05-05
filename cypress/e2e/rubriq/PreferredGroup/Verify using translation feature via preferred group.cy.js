@@ -1,5 +1,5 @@
-import pageObject from "./pageObjectRubriq.json";
-import testData from "../../fixtures/testDataRubriq.json";
+import pageObject from "../../../support/pageObjectRubriq.json";
+import testData from "../../../fixtures/testDataRubriq.json";
 function generateRandomEmail() {
     const timestamp = new Date().getTime();
     return `user${timestamp}@example.com`;
@@ -28,7 +28,7 @@ const testCases = [
 describe('Upload Document- Active plan/ Non Active plan, and also validate error message-Translate Tab', function () {
   testCases.forEach(({ language, languageSelector, email, password }) => {
     it(`Translate Document to ${language} if the user has an active plan`, function () {
-      cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmail, testData.rubriqLoginPassword);
+      cy.customloginAndNavigateToRubriq(testData.rubriqPreferredGroupEmail, testData.rubriqPreferredGroupPassword);
       cy.get(pageObject.tabNavigation.translateTab).click();
       cy.get(pageObject.translate.translateDoc).click();
       cy.get(pageObject.editing.fileUpload).click();
@@ -56,7 +56,7 @@ describe('Upload Document- Active plan/ Non Active plan, and also validate error
 
     })
     it('Verify the error message, If the user click continue button before uploading document - Translate', function() {
-      cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmail, testData.rubriqLoginPassword);
+      cy.customloginAndNavigateToRubriq(testData.rubriqPreferredGroupEmail, testData.rubriqPreferredGroupPassword);
           cy.get(pageObject.tabNavigation.translateTab).click();
           cy.get(pageObject.translate.translateDoc).click();
           cy.get(pageObject.editing.fileUpload).click();
