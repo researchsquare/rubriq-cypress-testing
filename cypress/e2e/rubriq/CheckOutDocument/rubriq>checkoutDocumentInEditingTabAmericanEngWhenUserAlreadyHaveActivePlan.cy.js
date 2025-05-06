@@ -1,5 +1,5 @@
-import pageObject from "../../../support/pageObjectRubriq.json"
-import TestData from "../../../fixtures/testDataRubriq.json"
+import pageObject from "../../../support/pageObjectRubriq.json";
+import TestData from "../../../fixtures/testDataRubriq.json";
 function generateRandomEmail() {
     const timestamp = new Date().getTime();
     return `user${timestamp}@example.com`;
@@ -36,13 +36,13 @@ describe('Upload Document- Active plan/ Non Active plan, and also validate error
     it('Verify the error message when the user did not have active plan', function() {
         const email = generateRandomEmail()
         const country = 'United States' // Specify your country here
-        cy.visit('https://secure-aje.staging.sqr.io')
+        cy.visit(Cypress.config('baseUrl'))
         cy.get(pageObject.login.regNewLink).should('be.visible') .click()
         cy.userRegistration(email, TestData.rubriqLoginPasswordActive, country)
         cy.acceptCookies()
         cy.url().should('include', '/home')
         cy.get(pageObject.tabNavigation.rubriqTab).first().click({force:true})
-        cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
+        cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq')
         cy.get(pageObject.editing.gotItBtn).click()
         cy.get(pageObject.editing.checkDocumentEdit).click()
         cy.get(pageObject.editing.noPlanContentBox).contains(TestData.noPlan).should('be.visible')

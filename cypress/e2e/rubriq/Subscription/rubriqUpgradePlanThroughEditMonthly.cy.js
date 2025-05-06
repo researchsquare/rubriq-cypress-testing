@@ -1,6 +1,6 @@
 
 let testData; // define outside so we can use it in beforeEach or inside cy.session
-import pageobject from './pageObjectRubriq.json';
+import pageobject from '../../../support/pageObjectRubriq.json';
 // Goes up 3 levels: cypress/e2e/rubriq → cypress/e2e → cypress → project root
 before(() => {
   cy.fixture('testDataRubriq').then((data) => {
@@ -24,20 +24,21 @@ describe('Upgrade', function () {
         const email = generateRandomEmail();
         const password = generateRandomPassword();
         const country = 'United States'; // Specify your country here
-        cy.visit('https://secure-aje.staging.sqr.io')
+        cy.visit(Cypress.config('baseUrl'))
+        cy.acceptCookies();
         cy.get(pageobject.login.regNewLink).should('be.visible') .click()
         cy.userRegistration(email, password, country)
-    cy.visit('https://secure-aje.staging.sqr.io')
-    cy.acceptCookies();
+    // cy.visit(Cypress.config('baseUrl'))
+    // cy.acceptCookies();
   //  cy.uiLogin( testData.rubriqLoginEmail,testData.rubriqLoginPassword )
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
    // cy.url().should('include','/home')
     cy.contains('Workspace').click({ force: true });
    // cy.get(rubriqTab).click();
-    cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq')
+    cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq')
     cy.get(pageobject.tabNavigation.Gotit).click()
     cy.get(pageobject.tabNavigation.editingTab).click();
-    cy.url().should('include', 'https://secure-aje.staging.sqr.io/en/rubriq/editing')
+    cy.url().should('include', Cypress.config('baseUrl')+'/en/rubriq/editing')
     cy.get(pageobject.editing.checkDocumentEdit).click()
     cy.get(pageobject.editing.upgradeNow).click()
     cy.get(pageobject.planAndPayment.getPremium)

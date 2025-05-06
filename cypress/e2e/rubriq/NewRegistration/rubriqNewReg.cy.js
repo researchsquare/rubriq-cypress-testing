@@ -1,4 +1,4 @@
-const pageobject = require('../pageObjectRubriq.json');
+const pageobject = require('../../../support/pageObjectRubriq.json');
 // Generate a random email address
 function generateRandomEmail() {
     const timestamp = new Date().getTime();
@@ -26,7 +26,7 @@ describe('User Registration Test', () => {
         });
         
         const country = 'United States'; // Specify your country here
-        cy.visit('https://secure-aje.staging.sqr.io')
+        cy.visit(Cypress.config('baseUrl'))
         cy.get(pageobject.login.regNewLink)
       .should('be.visible') // Assert that the element is visible
       .click();

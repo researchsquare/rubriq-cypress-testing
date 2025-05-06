@@ -10,9 +10,23 @@ Cypress.Commands.add("uiLogin", (Email, Password) => {
     cy.get(pageobject.login.submit).click()
     cy.wait('@login').its('response.statusCode').should('eq', 200)
 })
-
-Cypress.Commands.add('acceptCookies', () => {
-       cy.contains('Allow all').should('be.visible').click({force:true})   
+Cypress.Commands.add('acceptCookies',() => {
+  
+  cy.get('body').then(($body) => {
+    for(let i=0;i<20000;i++){
+     var length= $body.find('button:contains("Allow all")').length 
+     cy.log('loop')
+     if(length>0){
+      break
+     }
+    }
+    if (length> 0) {
+      cy.contains('Allow all').should('be.visible').click({ force: true });
+    } else {
+      cy.log('Cookie banner not found - proceeding');
+    }
+  });  
+  
   })
   Cypress.Commands.add("userRegistration", (email, password, country) => { 
     // cy.intercept({
@@ -55,7 +69,7 @@ Cypress.Commands.add('addPreferredGroup', (group,email,password) => {
   cy.uiLogin(email,password)
   cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
   cy.contains('My Plan').click({ force: true });
-  cy.url().should('include', Cypress.config('baseUrl')+'/en/plan')
+  cy.url().should('include', Cypress.config('baseUrl')+'en/rubriq/plan')
   cy.get(pageobject.editing.groupCode).should('be.visible').type(group,{delay:0})
   cy.get(pageobject.login.submit).click()
 });

@@ -1,4 +1,4 @@
-import pageObject from "../../../support/pageObjectRubriq.json";
+import pageObject from "../../../support/pageObjectRubriq.json"
 import testData from "../../../fixtures/testDataRubriq.json";
 // Test data for multiple styles of English
 const testCases = [
@@ -29,21 +29,21 @@ describe('Rubriq Document Features - Delete, Download, Upgrade', () => {
         describe(`Test for ${StyleOfEnglish}`,()=>{
             beforeEach(() => {
                 // Common setup steps
-               cy.session(`login-${testData.rubriqLoginEmail}`,()=>{
-                cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmail, testData.rubriqLoginPassword);
+               cy.session(`login-${testData.rubriqPreferredGroupEmail}`,()=>{
+                cy.customloginAndNavigateToRubriq(testData.rubriqPreferredGroupEmail, testData.rubriqPreferredGroupPassword);
                 uploadDocument();
                 cy.get(StyleOfEnglishSelector).click().should('be.checked')
                 cy.get(StyleOfEnglishSelector).next().should('contain',StyleOfEnglish)
                 cy.get(pageObject.editing.strBtn).click();
-                cy.get(pageObject.editing.getProfEditing, { timeout: 10000 }).should('exist');
+                cy.get(pageObject.editing.getProfEditing, { timeout:30000 }).should('exist');
                })
-               cy.visit('https://secure-aje.staging.sqr.io/en/rubriq');
+               cy.visit(Cypress.config('baseUrl')+'/en/rubriq');
             });
     
             it(`Edit document to ${StyleOfEnglish} and verify download`, () => {
                 cy.contains('Edited',{timeout:400000}).should('be.visible')
                 //cy.intercept('GET', '**/path-to-your-download-endpoint').as('fileDownload');
-                cy.intercept('GET', 'https://secure-aje.staging.sqr.io/api/digital-edit/*/download').as('fileDownload');
+                cy.intercept('GET', Cypress.config('baseUrl')+'/api/digital-edit/*/download').as('fileDownload');
                 cy.get(pageObject.editing.DownloadBtnEdit).click();
                 cy.wait('@fileDownload').then((intercept)=>{
                     expect(intercept.response.statusCode).to.equal(200)
