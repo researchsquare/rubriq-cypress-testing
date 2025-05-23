@@ -43,7 +43,7 @@
     },
     "planAndPayment":{
     "getPremium": "[title='curie.curie-premium']",
-    "getPremiumWithTranslation": "title='rubriq.rubriq-premium-with-translation'",
+    "getPremiumWithTranslation": "[title='rubriq.rubriq-premium-with-translation']",
     "checkOutWithPaddle": ".paddle-button",
     "zipCode": "[name='postcode']",
     "paymentEmail": "[data-testid='authenticationEmailInput']",
