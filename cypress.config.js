@@ -4,7 +4,6 @@ const path = require('path');
 //const pdf = require('pdf-parse');
 
 module.exports = defineConfig({
-  chromeWebSecurity: false,
   scrollBehavior: 'center',
   experimentalModifyObstructiveThirdPartyCode: true,
   fixturesFolder: "cypress/fixtures",
@@ -17,7 +16,7 @@ module.exports = defineConfig({
   viewportWidth: 1920,
   viewportHeight: 1080,
   retries: {
-    runMode: 2,
+    runMode: 0,
     openMode: 0
   },
   reporter: 'cypress-mochawesome-reporter',
@@ -62,9 +61,11 @@ module.exports = defineConfig({
       
      
     },
-    defaultCommandTimeout: 20000,
-    responseTimeout: 300000,
-    pageLoadTimeout: 200000,
-    execTimeout: 60000
+    defaultCommandTimeout: 40000,
+    responseTimeout: 30000,
+    pageLoadTimeout: 30000,
+    execTimeout: 60000,
+    chromeWebSecurity: false,
+    experimentalStudio: true,
   },
 });

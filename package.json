@@ -1,7 +1,8 @@
 {
   "devDependencies": {
     "@types/cypress": "^1.1.6",
-    "cypress": "^14.0.2",
+    "cypress": "^14.4.0",
+    "cypress-iframe": "^1.0.1",
     "cypress-mochawesome-reporter": "^3.8.2",
     "eslint": "^9.25.1",
     "eslint-plugin-cypress": "^4.3.0",
