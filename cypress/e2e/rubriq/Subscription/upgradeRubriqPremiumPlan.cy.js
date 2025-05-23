@@ -10,7 +10,7 @@ before(() => {
 // Generate a random email address
 function generateRandomEmail() {
   const timestamp = new Date().getTime();
-  return `user${timestamp}@example.com`;
+  return `user${timestamp}@test.aje.com`;
 }
 
 // Generate a random password
@@ -88,10 +88,10 @@ describe('Upgrade Rubriq Premium', function () {
       .find('[title="curie.get-starter"]')
       .click();
     cy.get(pageobject.planAndPayment.checkOutWithPaddle).should('be.visible').click({ force: true })
-    cy.paymentThroughApi(testData.rubriqLoginEmailPremiumMonthly, testData.rubriqLoginPasswordPremiumMonthly, testData.premium_editing_only_Monthly)
+    cy.paymentThroughApi(email,password, testData.premium_editing_only_Monthly)
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
     cy.contains('Log out').click({ force: true });
-    cy.uiLogin(testData.rubriqLoginEmailPremiumMonthly, testData.rubriqLoginPasswordPremiumMonthly)
+    cy.uiLogin(email,password)
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click()
     cy.contains('My Plan').click({ force: true });
     cy.contains('Rubriq Premium').should('be.visible')
@@ -126,15 +126,15 @@ describe('Upgrade Rubriq Premium', function () {
       .find('[title="curie.get-starter"]')
       .click();
     cy.get(pageobject.planAndPayment.checkOutWithPaddle).should('be.visible').click({ force: true })
-    cy.paymentThroughApi(testData.rubriqLoginEmailPremiumMonthly, testData.rubriqLoginPasswordPremiumMonthly, testData.premium_editing_only_Yearly)
+    cy.paymentThroughApi(email,password, testData.premium_editing_only_Yearly)
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
     cy.contains('Log out').click({ force: true });
-    cy.uiLogin(testData.rubriqLoginEmailPremiumMonthly, testData.rubriqLoginPasswordPremiumMonthly)
+    cy.uiLogin(email, password)
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click()
     cy.contains('My Plan').click({ force: true });
     cy.contains('Rubriq Premium').should('be.visible')
-    cy.contains('$16').should('be.visible')
-    cy.contains('month').should('be.visible')
+    cy.contains('$135').should('be.visible')
+    cy.contains('year').should('be.visible')
     cy.contains("Payment Set to start on " + getTrailEndDate()).should('be.visible')
   });
 });
