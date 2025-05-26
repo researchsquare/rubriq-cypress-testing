@@ -41,8 +41,12 @@
   "cvvData": "100",
   "rubriqPreferredGroupEmail": "user1746167004643@test.aje.com",
   "rubriqPreferredGroupPassword": "P@ssw0rd1202",
-  "rubriqLoginEmailPremiumMonthly": "user1747976295976@test.aje.com",
-  "rubriqLoginPasswordPremiumMonthly": "P@ssw0rd2933",
-  "rubriqLoginEmailPremiumYearly": "user1747976354042@test.aje.com",
-  "rubriqLoginPasswordPremiumYearly": "P@ssw0rd8137"
+  "rubriqLoginEmailPremiumMonthly": "user1748248478802@test.aje.com",
+  "rubriqLoginPasswordPremiumMonthly": "P@ssw0rd6071",
+  "rubriqLoginEmailPremiumYearly": "user1748248595148@test.aje.com",
+  "rubriqLoginPasswordPremiumYearly": "P@ssw0rd1594",
+  "rubriqLoginEmailPremiumWithTranslationMonthly": "user1748248747649@test.aje.com",
+  "rubriqLoginPasswordPremiumWithTranslationMonthly": "P@ssw0rd7890",
+  "rubriqLoginEmailPremiumWithTranslationYearly": "user1748248854735@test.aje.com",
+  "rubriqLoginPasswordPremiumWithTranslationYearly": "P@ssw0rd946"
 }

@@ -16,10 +16,10 @@
 // Import commands.js using ES2015 syntax:
 import './rubriq_commands'
 import 'cypress-mochawesome-reporter/register';
-
-
 Cypress.on('uncaught:exception', (err, runnable) => {
-    return false
+    if (err.message.includes("Cannot read properties of null (reading 'document')")) {
+    return false; // prevents Cypress from failing the test
+  }
 })
 
 // Alternatively you can use CommonJS syntax:

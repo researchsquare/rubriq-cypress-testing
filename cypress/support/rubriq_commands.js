@@ -11,7 +11,14 @@ Cypress.Commands.add("uiLogin", (Email, Password) => {
   cy.wait('@login').its('response.statusCode').should('eq', 200)
 })
 Cypress.Commands.add('acceptCookies', () => {
-      cy.contains('Allow all').should('be.visible').click({ force: true });
+   cy.wait(1000); // optional short delay if the banner loads slowly
+  cy.get('body').then(($body) => {
+    if ($body.find('button:contains("Allow all")').length > 0) {
+      cy.contains('Allow all').click({ force: true });
+    } else {
+      cy.log('Allow all button not present.');
+    }
+  });
 })
 Cypress.Commands.add("userRegistration", (email, password, country) => {
   cy.get(pageobject.login.registrationForm).children().get(pageobject.login.email).type(email, { delay: 0 })
