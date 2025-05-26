@@ -165,45 +165,6 @@ describe('Upgrade Rubriq Premium', function () {
     cy.contains("Payment Set to start on " + getTrailEndDate()).should('be.visible')
   });
   })
-  
-  // it('Upgrade rubriq premium via paddle billing - Yearly', function () {
-  //   const email = generateRandomEmail();
-  //   const password = generateRandomPassword();
-  //   const country = 'United States'; // Specify your country here
-  //   cy.visit(Cypress.config('baseUrl'))
-  //   cy.get(pageobject.login.regNewLink)
-  //     .should('be.visible') // Assert that the element is visible
-  //     .click();
-  //   cy.acceptCookies()
-  //   cy.userRegistration(email, password, country);
-  //   const filePath = 'cypress/fixtures/testDataRubriq.json';
-  //   updateTestDataYearly(filePath, email, password)
-  //   cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
-  //   cy.contains('Workspace').click({ force: true });
-  //   cy.url().should('include', Cypress.config('baseUrl') + '/en/rubriq')
-  //   cy.get(pageobject.tabNavigation.Gotit).click();
-  //   cy.get(pageobject.tabNavigation.editingTab).click();
-  //   cy.url().should('include', Cypress.config('baseUrl') + '/en/rubriq/editing')
-  //   cy.get(pageobject.editing.checkDocumentEdit).click()
-  //   cy.get(pageobject.editing.upgradeNow).click()
-  //   cy.get(pageobject.planAndPayment.getPremium)
-  //     .parent()
-  //     .parent()
-  //     .siblings()
-  //     .find('[title="curie.get-starter"]')
-  //     .click();
-  //   cy.get(pageobject.planAndPayment.checkOutWithPaddle).should('be.visible').click({ force: true })
-  //   cy.paymentThroughApi(email, password, testData.premium_editing_only_Yearly)
-  //   cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
-  //   cy.contains('Log out').click({ force: true });
-  //   cy.uiLogin(email, password)
-  //   cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click()
-  //   cy.contains('My Plan').click({ force: true });
-  //   cy.contains('Rubriq Premium').should('be.visible')
-  //   cy.contains('$135').should('be.visible')
-  //   cy.contains('year').should('be.visible')
-  //   cy.contains("Payment Set to start on " + getTrailEndDate()).should('be.visible')
-  // });
 });
 
 
