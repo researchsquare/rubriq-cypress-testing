@@ -10,7 +10,7 @@ describe('Verify Trail for Rubriq Premium plan with Translation', () => {
     cy.contains('Trial').should('be.visible')
   })
   it('Verify Trail Status Label for Users with Rubriq Premium with Translation Yearly Plan', () => {
-    cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmailPremiumYearly, testData.rubriqLoginPasswordPremiumYearly);
+    cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmailPremiumWithTranslationYearly, testData.rubriqLoginPasswordPremiumWithTranslationYearly);
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click()
     cy.contains('My Plan').click({ force: true });
     cy.contains('Trial').should('be.visible')
