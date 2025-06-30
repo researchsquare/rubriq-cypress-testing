@@ -142,13 +142,14 @@ Cypress.Commands.add('paymentThroughApi', (email, password, priceId) => {
     method: 'POST',
     body: { email, password }
   }).then((res) => {
-    Cypress.config('userid', res.body.user.identity);
+    const userId = res.body.user.identity;
     expect(res.status).to.eq(200);
     cy.log('User ID:', res.body.user.identity);
     const custom_data = JSON.stringify({
-      user_identity: Cypress.config('userid')
+      user_identity: userId,
+      projectEnvironmentName: "staging"
     })
-
+cy.log('Custom Data:', custom_data);
     // Checkout Request
     cy.request({
       url: 'https://sandbox-checkout-service.paddle.com/transaction-checkout',
@@ -169,8 +170,7 @@ Cypress.Commands.add('paymentThroughApi', (email, password, priceId) => {
             allow_discount_removal: true,
             show_add_tax_id: true,
             variant: 'multi-page',
-            source_page: 'https://secure-aje.staging.sqr.io/en/rubriq/plan/subscribe/freetrial',
-            referrer: 'secure-aje.staging.sqr.io'
+            source_page:'https://rubriq-release-aje.staging.sqr.io/en/rubriq/plan/subscribe/freetrial',
           },
           custom_data,
           items: [{ price_id: priceId, quantity: 1 }]
@@ -178,7 +178,6 @@ Cypress.Commands.add('paymentThroughApi', (email, password, priceId) => {
       }
     }).then((res) => {
       const checkoutId = res.body.data.id;
-      Cypress.config('checkout_id', checkoutId);
       expect(res.status).to.eq(201);
       cy.log('Checkout ID:', checkoutId);
       // Customer Validation
@@ -188,7 +187,7 @@ Cypress.Commands.add('paymentThroughApi', (email, password, priceId) => {
         body: {
           data: {
             customer: {
-              email,
+             email,
               marketing_consent: false,
               address: {
                 country_code: 'IN',
@@ -213,16 +212,16 @@ Cypress.Commands.add('paymentThroughApi', (email, password, priceId) => {
                     cardholder_name: 'Ajith',
                     card_first_six: '411111',
                     card_last_four: '1111',
-                    expiry_month: 7,
+                    expiry_month: 9,
                     expiry_year: 2026,
                     card_brand: 'visa'
                   },
                   three_d_s: {
-                    browser_info: 'eyJ3aWR0aCI6MTI4MCwiaGVpZ2h0Ijo3MjAsImRlcHRoIjoyNCw...'
+                    browser_info: 'eyJ3aWR0aCI6MTI4MCwiaGVpZ2h0Ijo3MjAsImRlcHRoIjoyNCwidGltZXpvbmUiOi0zMzAsInVzZXJfYWdlbnQiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTM3LjAuMC4wIFNhZmFyaS81MzcuMzYiLCJqYXZhIjpmYWxzZSwibGFuZ3VhZ2UiOiJlbi1VUyIsImJyb3dzZXJfc2l6ZSI6IjA1IiwiYWNjZXB0X2hlYWRlciI6InRleHQvaHRtbCxhcHBsaWNhdGlvbi94aHRtbCt4bWwsYXBwbGljYXRpb24veG1scT0wLjksKi8qcT0wLjgifQ=='
                   },
                   tokenex_card: {
-                    encrypted_card_number: 'Jz57ntiIsZlctZ746VODpivZ0/LR1iWY/YUVhjkCVB4/G65ANO8JGHznLOLMsX8lGtG0PxpN6o7ujrbnMLRpcrcPlmLQ8mX66VoO3KoZzVtzGMS4V75I2u08vjgEyuz5PH4Vnkr8YH4CMko0wzzEVhfpdJ3Sh8IyPmN4Lx5gKeBKHQhQxIKW19hPENNKT7uKFumXvxYK5CmoR6fpkBieFtBtAp9rhiUKy06Ruc9cTPb+cGnG4M669eDgxfFHkO5fEHedmWXbsh6ZRrLAtxHzM7zwygng5Oyprqtf2c2fy/pVzbWsNpFwSdzvv5FaDQTez+WvQ8e2dTV5Fz+rNDPsPQ==',
-                    encrypted_cvv: 'MG5PYEXo+s6PHrZ8JzD640nW3/sEThfxWV55cfK1xF7uVi3aTh+sU5p6Q+A52sGt8q+2nV/EYgeoB3BZOi151Gq6loTPQSpOgMbL6jTJiJYdSVbaQqPvu61x4gYXg3E97n7vAOVxkZrEVyoG7XiFjsaKdu3gy/4peumZ1Z+DX+BmZ8mYejVApU3HykEzlFfDotyqfHBiNyI6ze7XOa2M3WY6LOE1G7t0vLDwwzYAGRi7QIekl5TkhQAgSsg3BjT7QAZknWsl/RUZt538Y7sbRgtqFqysnwIWShZ7I8O1Bkg119DkBkLj5XabKdDWckzbKZqlV35YIt3+L/L7PlyrGA=='
+                    encrypted_card_number: 'VqLbZ4ZF0FS1m/XcRCNUD+JVyCjJJkVNcUMWC93zv6jEFs687gAWujBCPuPvXApn0iVOhqr9kOG9x1ejXr+ie0GV3kcCQcOV8UvSUhzZ3FflrdLiSYtoQpWgf7zN5XR8OXNNvOUnUG1+2XcXDGmgve6SV6AzCV2Nt19ATa8youZsIBfvfOwk9KrIrLplVpLuMxsjfZjM+xIR5ZnVJheEy+dEWJ+/+xXHA5OHuEK+9T8ApWp1h33Xe/I1GJW39ju8aQuresDJfs1YSl5GCGnNJwQSUBcnJvYEd/4c5wwqSXpnfYMbRNxBSBqz60/ux0bZVMms+LQzkNhhXySIQV++Xg==',
+                    encrypted_cvv: 'P7yEPWLzbnGb+dVCCks6Zald3G2tlpu21iqtZ6pSZgx+XGAISIkPqiOUwjsrZWfWCjd/SDyn5kGxQcwKRl+RcVo03/lmFoSvoQmN8tSEvmzeBGTPj2Czx6QxQko2SER7h5XODQLcOvDpcBdIeHxk6Q3bhKoyzHQgN+55zuHcfYZ0c3c54ksGNOQQ5UUKGNCFPfqs9kv+6uMGcxWBW9lmWo7DgussokCESZGXKJM3H8SR1MVlrJUq87+9k9E4uZzY9mBmusnk2CFhDqSSgg6Lm9fa89bsbmS/+M6a4b3eXLY+pGGiVucb/h6Nzpkbcqv85xJ0mGdesXlijp2JeSQ5uw=='
                   }
                 }
               }

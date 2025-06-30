@@ -17,7 +17,7 @@
 import './rubriq_commands'
 import 'cypress-mochawesome-reporter/register';
 Cypress.on('uncaught:exception', (err, runnable) => {
-    if (err.message.includes("Cannot read properties of null (reading 'document')")) {
+    if (err.message.includes("[PADDLE BILLING] You must specify your ")) {
     return false; // prevents Cypress from failing the test
   }
 })

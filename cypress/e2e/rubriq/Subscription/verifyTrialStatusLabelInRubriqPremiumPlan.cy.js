@@ -26,9 +26,9 @@ const testCases = [
         password: testData.rubriqLoginPasswordPremiumWithTranslationYearly,
     }
 ];
-describe('Verify Trail for Rubriq Premium plan', () => {
+describe('Verify Trial for Rubriq Premium plan', () => {
   testCases.forEach(({planType, status, email, password}) => {
-    it(`Verify Trail Status Label for Users with ${planType}`, () => {
+    it(`Verify Trial Status Label for Users with ${planType}`, () => {
       cy.visit(Cypress.config('baseUrl'))
       cy.uiLogin(email, password);
       cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();

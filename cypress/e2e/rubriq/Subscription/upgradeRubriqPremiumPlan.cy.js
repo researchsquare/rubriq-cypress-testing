@@ -152,8 +152,8 @@ describe('Upgrade Rubriq Premium', function () {
       .siblings()
       .find('[title="curie.get-starter"]')
       .click();
-    cy.get(pageobject.planAndPayment.checkOutWithPaddle).should('be.visible').click({ force: true })
-    cy.paymentThroughApi(email, password,priceId)
+    cy.get(pageobject.planAndPayment.checkOutWithPaddle).should('be.visible')
+    cy.paymentThroughApi(email,password,priceId)
     cy.get(pageobject.tabNavigation.myAccount).should('be.visible').click();
     cy.contains('Log out').click({ force: true });
     cy.uiLogin(email, password)

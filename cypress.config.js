@@ -28,7 +28,7 @@ module.exports = defineConfig({
     saveAllAttempts: false,
   },
   e2e: {
-    baseUrl: 'https://secure-aje.staging.sqr.io',
+    baseUrl: 'https://rubriq-release-aje.staging.sqr.io',
     specPattern: 'cypress/e2e/rubriq/**/*.cy.{js,jsx,ts,tsx}',
     trashAssetsBeforeRuns: true,
     supportFile: "cypress/support/e2e.js",
