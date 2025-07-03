@@ -234,4 +234,58 @@ cy.log('Custom Data:', custom_data);
     });
   });
 });
+Cypress.Commands.add('makeSubscriptionActive', (email) => {
+  const apiKey = 'Bearer pdl_sdbx_apikey_01jyzyzvffvas72er4e60qm7gk_7MY1ajc7gCMXNj9WwsWj8X_AJE';
+
+  // Step 1: Get customer by email
+  cy.request({
+    method: 'GET',
+    url: 'https://sandbox-api.paddle.com/customers',
+    headers: {
+      Authorization: apiKey,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then((res) => {
+    const customer = res.body.data.find(c => c.email === email);
+
+    if (!customer) throw new Error(`No customer found with email: ${email}`);
+
+    const customerId = customer.id;
+    Cypress.env('customerId', customerId);
+
+    // Step 2: Get subscription by customer ID
+    cy.request({
+      method: 'GET',
+      url: 'https://sandbox-api.paddle.com/subscriptions',
+      headers: {
+        Authorization: apiKey,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => {
+      const subscription = res.body.data.find(s => s.customer_id === customerId);
+
+      if (!subscription) throw new Error(`No subscription found for customer ID: ${customerId}`);
+
+      const subscriptionId = subscription.id;
+      Cypress.env('subscriptionId', subscriptionId);
+
+      // Step 3: Activate the subscription
+      cy.request({
+        method: 'POST',
+        url: `https://sandbox-api.paddle.com/subscriptions/${subscriptionId}/activate`,
+        headers: {
+          Authorization: apiKey,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => {
+        cy.log('Subscription activated:', res.body);
+        expect(res.status).to.eq(200);
+      });
+    });
+  });
+});
+
 

@@ -24,6 +24,7 @@ const rubriqPremiumWithTranslation = [
         password: testData.rubriqLoginPasswordPremiumWithTranslationMonthly,
         StyleOfEnglish: 'American English',
         StyleOfEnglishSelector: pageObject.editing.styleOfEngAE,
+        languageSelector: pageObject.translate.chineseLang,
     },
     {
         planType: 'Rubriq Premium With Translation Yearly',
@@ -31,6 +32,7 @@ const rubriqPremiumWithTranslation = [
         password: testData.rubriqLoginPasswordPremiumWithTranslationYearly,
         StyleOfEnglish: 'American English',
         StyleOfEnglishSelector: pageObject.editing.styleOfEngAE,
+        languageSelector: pageObject.translate.chineseLang,
     }
 ]
 // Function to upload a document
@@ -41,9 +43,10 @@ const uploadDocument = () => {
     cy.contains('Upload complete').should('be.visible')
     cy.get(pageObject.tabNavigation.ctnBtn).parent({ timeout: 10000 }).click();
 };
-describe('Verify the functionality in trial period of Rubriq Premium plan', () => {
+describe('Verify the functionality in active period of Rubriq Premium plan', () => {
     rubriqpremium.forEach(({ planType, email, password, StyleOfEnglish, StyleOfEnglishSelector }) => {
-        it(`Verify feature access for users with ${planType}`, () => {
+        it(`Verify feature access in active period for users with ${planType}`, () => {
+            cy.makeSubscriptionActive(email)
             cy.visit(Cypress.config('baseUrl'))
             cy.customloginAndNavigateToRubriq(email, password);
             uploadDocument()
@@ -57,8 +60,9 @@ describe('Verify the functionality in trial period of Rubriq Premium plan', () =
 
         });
     });
-    rubriqPremiumWithTranslation.forEach(({ planType, email, password, StyleOfEnglish, StyleOfEnglishSelector }) => {
-        it(`Verify feature access for users with ${planType}`, () => {
+    rubriqPremiumWithTranslation.forEach(({ planType, email, password, StyleOfEnglish, StyleOfEnglishSelector, languageSelector }) => {
+        it(`Verify feature access in active period for users with ${planType}`, () => {
+            cy.makeSubscriptionActive(email)
             cy.visit(Cypress.config('baseUrl'))
             cy.customloginAndNavigateToRubriq(email, password);
             uploadDocument()
@@ -66,9 +70,16 @@ describe('Verify the functionality in trial period of Rubriq Premium plan', () =
             cy.get(StyleOfEnglishSelector).next().should('contain', StyleOfEnglish)
             cy.get(pageObject.editing.strBtn).click();
             cy.get(pageObject.editing.getProfEditing, { timeout: 10000 }).should('exist');
-            cy.get(pageObject.tabNavigation.translateTab).click();
+            cy.get(pageObject.tabNavigation.translateTab).click()
+            cy.reload(true);
             cy.get(pageObject.translate.translateDoc).click();
-
+            cy.get(pageObject.editing.fileUpload).click();
+            cy.uploadFile('aje_ai_and_ml.docx');
+            cy.contains('Upload complete').should('be.visible')
+            cy.get(pageObject.tabNavigation.ctnBtn).click({ force: true });
+            cy.get(languageSelector).click();
+            cy.get(pageObject.editing.strBtn).click();
+            cy.get(pageObject.translate.dataIconTranslate).should('exist');
         });
     });
 });
