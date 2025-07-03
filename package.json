@@ -7,5 +7,10 @@
     "eslint": "^9.25.1",
     "eslint-plugin-cypress": "^4.3.0",
     "fs-extra": "^11.3.0"
-  }
+  },
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "npx cypress run --spec 'cypress/e2e/rubriq/NewRegistration/rubriqNewReg.cy.js,cypress/e2e/rubriq/BasicTest/basicRubriq.cy.js,cypress/e2e/rubriq/BasicTest/rubriq_navigation.cy.js,cypress/e2e/rubriq/CheckOutDocument/rubriq>checkoutDocumentInEditingTabAmericanEngWhenUserAlreadyHaveActivePlan.cy.js,cypress/e2e/rubriq/PreferredGroup/Verify AddingThePreferredGroup.cy.js' --browser chrome ",
+    "cypress:run:headless": "cypress run --headless"
+}
 }

@@ -28,7 +28,7 @@ const testCases = [
 describe('Upload Document- Active plan/ Non Active plan, and also validate error message-Translate Tab', function () {
   testCases.forEach(({ language, languageSelector, email, password }) => {
     it(`Translate Document to ${language} if the user has an active plan`, function () {
-      cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmail, testData.rubriqLoginPassword);
+      cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmailPremiumWithTranslationMonthly, testData.rubriqLoginPasswordPremiumWithTranslationMonthly);
       cy.get(pageObject.tabNavigation.translateTab).click();
       cy.get(pageObject.translate.translateDoc).click();
       cy.get(pageObject.editing.fileUpload).click();
@@ -56,18 +56,12 @@ describe('Upload Document- Active plan/ Non Active plan, and also validate error
 
     })
     it('Verify the error message, If the user click continue button before uploading document - Translate', function() {
-      cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmail, testData.rubriqLoginPassword);
+      cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmailPremiumWithTranslationMonthly, testData.rubriqLoginPasswordPremiumWithTranslationMonthly);
           cy.get(pageObject.tabNavigation.translateTab).click();
           cy.get(pageObject.translate.translateDoc).click();
           cy.get(pageObject.editing.fileUpload).click();
         cy.get(pageObject.tabNavigation.ctnBtn).click()
         cy.get(pageObject.editing.errorUploadFile).contains(testData.errorMsgUploadFile).should('be.visible')
     })
-    // it('Verify the limited excess pop-up window is displaying, if the translation is more than 2 ', function() {
-    //   cy.customloginAndNavigateToRubriq(email,testData.curieLoginPasswordActive);
-    //     cy.get(pageObject.tabNavigation.translateTab).click()
-    //     cy.get(pageObject.translate.translateDoc).click()
-    //     cy.get(pageObject.translate.translationLimitExceeded).should('exist')
-    // })
 })
 })

@@ -29,8 +29,8 @@ describe('Rubriq Document Features - Delete, Download, Upgrade', () => {
         describe(`Test for ${StyleOfEnglish}`,()=>{
             beforeEach(() => {
                 // Common setup steps
-               cy.session(`login-${testData.rubriqLoginEmail}`,()=>{
-                cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmail, testData.rubriqLoginPassword);
+               cy.session(`login-${testData.rubriqLoginEmailPremiumMonthly}`,()=>{
+                cy.customloginAndNavigateToRubriq(testData.rubriqLoginEmailPremiumMonthly, testData.rubriqLoginPasswordPremiumMonthly);
                 uploadDocument();
                 cy.get(StyleOfEnglishSelector).click().should('be.checked')
                 cy.get(StyleOfEnglishSelector).next().should('contain',StyleOfEnglish)
